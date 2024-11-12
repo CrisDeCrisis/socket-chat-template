@@ -65,6 +65,14 @@ authCtrl.me = async (req, res) => {
     try {
         const user = req.user;
 
+        const token = await generateJWT(user);
+
+        res.cookie('token', token, {
+            httpOnly: true, // The cookie only accessible by the web server
+            secure: false,  // Set to true if your website is served over HTTPS
+            maxAge: 60 * 60 * 1000 // 1 hour
+        });
+
         res.status(200).json({
             user,
             message: 'User retrieved successfully.'
