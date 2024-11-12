@@ -8,6 +8,7 @@ import { Server } from 'socket.io';
 import { PORT } from './configs/env.config.js';
 import { connectDB } from './database/database.js';
 import { authRouter } from './router/auth.routes.js';
+import { messageRouter } from './router/message.routes.js';
 
 const app = express();
 const server = createServer(app);
@@ -24,6 +25,7 @@ app.use(cors({
 }));
 
 app.use('/api', authRouter);
+app.use('/api/messages', messageRouter);
 
 server.listen(PORT, () => {
     connectDB();
