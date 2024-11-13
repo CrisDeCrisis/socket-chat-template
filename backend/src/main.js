@@ -1,0 +1,39 @@
+import { createServer } from 'node:http';
+import { Server } from 'socket.io';
+import { app } from './app.js';
+import { PORT } from './configs/env.config.js';
+import { connectDB } from './database/dataBase.js';
+
+const server = createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE']
+    }
+});
+
+io.on('connection', (socket) => {
+
+    // TODO: validar el JWT
+    // Si el token no es válido, desconectar
+
+    //TODO: saber que usuario esta activo mediante el _id
+
+    //TODO: emitir todos los usuarios conectados
+
+    //TODO: socket join, _id
+
+    //TODO: escuchar cuando el cliente manda un mensaje
+    //mensaje-personal
+
+    //TODO: desconectar
+    //marcar en la base de datos que el usuario se desconecto
+
+    //TODO: emitir todos los usuarios conectados
+
+});
+
+server.listen(PORT, () => {
+    connectDB();
+    console.log(`Server is running on PORT: ${PORT}`);
+});

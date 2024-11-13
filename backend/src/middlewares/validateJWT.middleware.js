@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { JWT_KEY } from '../configs/env.config.js';
-import { connectDB } from '../dataBase/dataBase.js';
+import { connectDB } from '../database/dataBase.js';
 import { userModel } from '../models/user.model.js';
 
 export const validateJWT = async (req, res, next) => {
