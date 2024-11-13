@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage, LoginPage, LoadingPage, NotFoundPage, RegisterPage } from "../views";
+import { HomePage, LoginPage, LoadingPage, NotFoundPage, RegisterPage, ChatPage } from "../views";
 import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
 
@@ -15,6 +15,7 @@ export const AppRouter = () => {
                     </Route>
                     <Route element={<PrivateRoutes />}>
                         <Route path="/" element={<HomePage />} />
+                        <Route path="/chat" element={<ChatPage />} />
                     </Route>
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
