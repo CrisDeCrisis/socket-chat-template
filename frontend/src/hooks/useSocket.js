@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import io from "socket.io-client";
+import Cookies from 'js-cookie';
 
 export const useSocket = (serverPath) => {
     // const socket = useMemo(() => io.connect(serverPath, {
@@ -10,10 +11,15 @@ export const useSocket = (serverPath) => {
 
     const connectSocket = useCallback(() => {
 
+        const token = Cookies.get('token'); // !Revisar, no recupera el token al recargar la pagina
+
         const socketTemp = io.connect(serverPath, {
             transports: ['websocket'],
             autoConnect: true,
             forceNew: true,
+            query: {
+                'x-token': token
+            }
         });
 
         setSocket(socketTemp);

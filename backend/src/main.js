@@ -3,6 +3,7 @@ import { Server } from 'socket.io';
 import { app } from './app.js';
 import { PORT } from './configs/env.config.js';
 import { connectDB } from './database/dataBase.js';
+import { authJWT } from './helpers/authJWT.helper.js';
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -13,6 +14,13 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
+
+    const [valido, _id] = authJWT(socket.handshake.query['x-token']);
+
+    if (!valido) {
+        console.log('Cliente no autenticado', _id); //! Revisar, se comporta de forma extraña.
+        return socket.disconnect();
+    }
 
     console.log('Cliente conectado');
     // TODO: validar el JWT

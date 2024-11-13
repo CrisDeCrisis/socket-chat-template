@@ -45,8 +45,8 @@ authCtrl.login = async (req, res) => {
         const token = await generateJWT(user);
 
         res.cookie('token', token, {
-            httpOnly: true, // The cookie only accessible by the web server
-            secure: false,  // Set to true if your website is served over HTTPS
+            httpOnly: false, // The cookie only accessible by the web server //! Cambiar a true luego de probar
+            secure: false,  // Set to true if your website is served over HTTPS //! Cambiar a true en caso de usar https
             maxAge: 60 * 60 * 1000 // 1 hour
         });
 
