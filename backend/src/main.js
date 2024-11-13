@@ -15,14 +15,15 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
 
-    const [valido, _id] = authJWT(socket.handshake.query['x-token']);
+    const [valido, user] = authJWT(socket.handshake.query['x-token']);
+    console.log(socket.handshake.query['x-token']);
 
     if (!valido) {
-        console.log('Cliente no autenticado', _id); //! Revisar, se comporta de forma extraña.
+        console.log('Cliente no autenticado'); //! Revisar, se comporta de forma extraña.
         return socket.disconnect();
     }
 
-    console.log('Cliente conectado');
+    console.log('Cliente conectado', user._id);
     // TODO: validar el JWT
     // Si el token no es válido, desconectar
 
