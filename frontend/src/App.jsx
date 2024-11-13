@@ -1,3 +1,4 @@
+import { SocketContextProvider } from "./contexts/chat/chatContextProvider";
 import { AuthContextProvider } from "./contexts/user/authContextProvider";
 import { AppRouter } from "./pages/AppRouter";
 import { Toaster } from "react-hot-toast";
@@ -11,7 +12,9 @@ function App() {
         toastOptions={{ duration: 3000 }}
       />
       <AuthContextProvider>
-        <AppRouter />
+        <SocketContextProvider>
+          <AppRouter />
+        </SocketContextProvider>
       </AuthContextProvider>
     </>
   );

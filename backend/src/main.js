@@ -14,6 +14,7 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
 
+    console.log('Cliente conectado');
     // TODO: validar el JWT
     // Si el token no es válido, desconectar
 
@@ -28,6 +29,9 @@ io.on('connection', (socket) => {
 
     //TODO: desconectar
     //marcar en la base de datos que el usuario se desconecto
+    socket.on('disconnect', () => {
+        console.log('Cliente desconectado');
+    });
 
     //TODO: emitir todos los usuarios conectados
 

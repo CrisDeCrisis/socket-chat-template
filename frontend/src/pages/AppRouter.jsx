@@ -14,8 +14,8 @@ export const AppRouter = () => {
                         <Route path="/register" element={<RegisterPage />} />
                     </Route>
                     <Route element={<PrivateRoutes />}>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/chat" element={<ChatPage />} />
+                        <Route path="/home" element={<HomePage />} />
+                        <Route path="/" element={<ChatPage />} />
                     </Route>
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
