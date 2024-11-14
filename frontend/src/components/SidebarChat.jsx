@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const SidebarChat = () => {
     // Datos de ejemplo, estos serán reemplazados por datos del contexto
     const chats = [
@@ -8,9 +10,9 @@ export const SidebarChat = () => {
 
     return (
         <div className="h-screen bg-gray-800 text-white">
-            <div className="p-4 border-b border-gray-700">
+            <Link to='/home' className="p-4 border-b border-gray-700">
                 <h2 className="text-xl font-semibold">Chats</h2>
-            </div>
+            </Link>
             <div>
                 {chats.map(chat => (
                     <div key={chat.id} className="flex items-center p-2 mb-2 shadow-lg">

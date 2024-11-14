@@ -16,23 +16,16 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
 
-    // FIXME: Implementar lógica correcta de parseo de cookies
     const token = cookie.parse(socket.handshake.headers["cookie"]).token;
-    if (!cookie) {
-        console.log("No se encontró Cookie con Token");
-        return socket.disconnect();
-    }
-    const [valido, userId] = authJWT(token);
-    console.log(token);
+
+    const [valido, user] = authJWT(token);
 
     if (!valido) {
-        console.log('Cliente no autenticado'); //! Revisar, se comporta de forma extraña.
+        console.log('Cliente no autenticado');
         return socket.disconnect();
     }
 
-    console.log('Cliente conectado', userId);
-    // TODO: validar el JWT
-    // Si el token no es válido, desconectar
+    console.log('Cliente conectado', user._id);
 
     //TODO: saber que usuario esta activo mediante el _id
 
@@ -46,7 +39,7 @@ io.on('connection', (socket) => {
     //TODO: desconectar
     //marcar en la base de datos que el usuario se desconecto
     socket.on('disconnect', () => {
-        console.log('Cliente desconectado');
+        console.log('Cliente desconectado', user._id);
     });
 
     //TODO: emitir todos los usuarios conectados

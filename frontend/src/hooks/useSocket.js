@@ -11,16 +11,10 @@ export const useSocket = (serverPath) => {
 
     const connectSocket = useCallback(() => {
 
-        const token = Cookies.get('token'); // !Revisar, no recupera el token al recargar la pagina
-        console.log(token);
-
         const socketTemp = io.connect(serverPath, {
             transports: ['websocket'],
             autoConnect: true,
             forceNew: true,
-            query: {
-                'x-token': token
-            }
         });
 
         setSocket(socketTemp);
