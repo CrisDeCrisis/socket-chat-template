@@ -10,16 +10,28 @@ export const SocketContextProvider = ({ children }) => {
     const { state } = useAuthContext();
 
     useEffect(() => {
+
         if (state.user) {
             connectSocket();
-        }
+        };
+
     }, [state, connectSocket]);
 
     useEffect(() => {
+
         if (!state.user) {
             disconnectSocket();
-        }
+        };
+
     }, [state, disconnectSocket]);
+
+    useEffect(() => {
+
+        socket?.on('users-list', (users) => {
+            console.log(users);
+        });
+
+    }, [socket]);
 
     return (
         <SocketContext.Provider value={{ socket, online }}>

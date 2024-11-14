@@ -5,7 +5,7 @@ import { app } from './app.js';
 import { PORT } from './configs/env.config.js';
 import { connectDB } from './database/dataBase.js';
 import { authJWT } from './helpers/authJWT.helper.js';
-import { userOffline, userOnline } from "./controllers/socket.controller.js";
+import { getUsersOnline, userOffline, userOnline } from "./controllers/socket.controller.js";
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -31,6 +31,7 @@ io.on('connection', async (socket) => {
     //TODO: saber que usuario esta activo mediante el _id
 
     //TODO: emitir todos los usuarios conectados
+    io.emit('users-list', await getUsersOnline());
 
     //TODO: socket join, _id
 
