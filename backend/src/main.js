@@ -1,3 +1,4 @@
+import cookie from "cookie";
 import { createServer } from 'node:http';
 import { Server } from 'socket.io';
 import { app } from './app.js';
@@ -16,22 +17,20 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
 
     // FIXME: Implementar lógica correcta de parseo de cookies
-    const cookie = /token=(.*)(\s|;)?/.exec(
-        socket.handshake.headers["cookie"]
-    )?.[1];
+    const token = cookie.parse(socket.handshake.headers["cookie"]).token;
     if (!cookie) {
         console.log("No se encontró Cookie con Token");
         return socket.disconnect();
     }
-    const [valido, user] = authJWT(socket.handshake.query['x-token']);
-    console.log(socket.handshake.query['x-token']);
+    const [valido, userId] = authJWT(token);
+    console.log(token);
 
     if (!valido) {
         console.log('Cliente no autenticado'); //! Revisar, se comporta de forma extraña.
         return socket.disconnect();
     }
 
-    console.log('Cliente conectado', user._id);
+    console.log('Cliente conectado', userId);
     // TODO: validar el JWT
     // Si el token no es válido, desconectar
 
