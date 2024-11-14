@@ -1,3 +1,4 @@
+import { ChatContextProvider } from "./contexts/chat/chatContextProvider";
 import { SocketContextProvider } from "./contexts/socket/socketContextProvider";
 import { AuthContextProvider } from "./contexts/user/authContextProvider";
 import { AppRouter } from "./pages/AppRouter";
@@ -13,7 +14,9 @@ function App() {
       />
       <AuthContextProvider>
         <SocketContextProvider>
-          <AppRouter />
+          <ChatContextProvider>
+            <AppRouter />
+          </ChatContextProvider>
         </SocketContextProvider>
       </AuthContextProvider>
     </>
