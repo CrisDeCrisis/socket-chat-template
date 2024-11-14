@@ -15,6 +15,14 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
 
+    // FIXME: Implementar lógica correcta de parseo de cookies
+    const cookie = /token=(.*)(\s|;)?/.exec(
+        socket.handshake.headers["cookie"]
+    )?.[1];
+    if (!cookie) {
+        console.log("No se encontró Cookie con Token");
+        return socket.disconnect();
+    }
     const [valido, user] = authJWT(socket.handshake.query['x-token']);
     console.log(socket.handshake.query['x-token']);
 
