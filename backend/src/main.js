@@ -5,6 +5,7 @@ import { app } from './app.js';
 import { PORT } from './configs/env.config.js';
 import { connectDB } from './database/dataBase.js';
 import { authJWT } from './helpers/authJWT.helper.js';
+import { userOffline, userOnline } from "./controllers/socket.controller.js";
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -14,7 +15,7 @@ const io = new Server(server, {
     }
 });
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
 
     const token = cookie.parse(socket.handshake.headers["cookie"]).token;
 
@@ -25,7 +26,7 @@ io.on('connection', (socket) => {
         return socket.disconnect();
     }
 
-    console.log('Cliente conectado', user._id);
+    await userOnline(user._id);
 
     //TODO: saber que usuario esta activo mediante el _id
 
@@ -38,8 +39,8 @@ io.on('connection', (socket) => {
 
     //TODO: desconectar
     //marcar en la base de datos que el usuario se desconecto
-    socket.on('disconnect', () => {
-        console.log('Cliente desconectado', user._id);
+    socket.on('disconnect', async () => {
+        await userOffline(user._id);
     });
 
     //TODO: emitir todos los usuarios conectados

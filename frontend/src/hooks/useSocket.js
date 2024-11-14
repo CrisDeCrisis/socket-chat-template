@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import io from "socket.io-client";
-import Cookies from 'js-cookie';
 
 export const useSocket = (serverPath) => {
     // const socket = useMemo(() => io.connect(serverPath, {
