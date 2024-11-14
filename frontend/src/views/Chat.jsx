@@ -1,9 +1,11 @@
 import { InboxChats } from "../components/InboxChats"
 import { SidebarChat } from "../components/SidebarChat"
 import { SelectChat } from "../components/SelectChat"
+import { useChatContext } from "../contexts/chat/chatContextProvider"
 
 const Chat = () => {
-    const isChatSelected = true
+
+    const { chatState } = useChatContext();
 
     return (
         <div className="flex h-screen">
@@ -11,7 +13,7 @@ const Chat = () => {
                 <SidebarChat />
             </div>
             <div className="w-4/5">
-                {isChatSelected ? <InboxChats /> : <SelectChat />}
+                {chatState.chatActive ? <InboxChats /> : <SelectChat />}
             </div>
         </div>
     )

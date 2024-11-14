@@ -42,6 +42,7 @@ io.on('connection', async (socket) => {
     //marcar en la base de datos que el usuario se desconecto
     socket.on('disconnect', async () => {
         await userOffline(user._id);
+        io.emit('users-list', await getUsersOnline());
     });
 
     //TODO: emitir todos los usuarios conectados

@@ -8,7 +8,7 @@ export const ChatContextProvider = ({ children }) => {
 
     const initialState = {
         _id: '', //ID del usuario conectado
-        chatActivo: null, //ID del chat activo
+        chatActive: null, //ID del chat activo
         users: [], //Todos los usuarios de la base de datos
         messages: [], //Mensajes del chat
     };

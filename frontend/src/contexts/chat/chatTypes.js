@@ -1,4 +1,4 @@
 export const chatTypes = {
-    ADD_MESSAGE: 'ADD_MESSAGE',
-    ADD_USER: 'ADD_USER',
+    LOAD_USERS: '[Chat] Load users',
+    SELECT_CHAT: '[Chat] Select chat',
 }

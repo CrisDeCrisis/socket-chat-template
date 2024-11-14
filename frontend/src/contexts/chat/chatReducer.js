@@ -1,17 +1,19 @@
 import { chatTypes } from "./chatTypes"
 
 export const chatReducer = (state, action) => {
+
     switch (action.type) {
-        case chatTypes.ADD_MESSAGE:
+        case chatTypes.LOAD_USERS:
             return {
                 ...state,
-                user: action.payload.user
+                users: [...action.payload]
             }
-        case chatTypes.ADD_USER:
+        case chatTypes.SELECT_CHAT:
             return {
                 ...state,
-                user: action.payload.user
+                chatActive: action.payload
             }
+
         default:
             return state
     }

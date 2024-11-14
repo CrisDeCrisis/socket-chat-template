@@ -13,11 +13,11 @@ function App() {
         toastOptions={{ duration: 3000 }}
       />
       <AuthContextProvider>
-        <SocketContextProvider>
-          <ChatContextProvider>
+        <ChatContextProvider>
+          <SocketContextProvider>
             <AppRouter />
-          </ChatContextProvider>
-        </SocketContextProvider>
+          </SocketContextProvider>
+        </ChatContextProvider>
       </AuthContextProvider>
     </>
   );
