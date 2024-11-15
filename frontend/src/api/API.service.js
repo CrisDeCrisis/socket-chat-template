@@ -43,3 +43,13 @@ export const logoutService = async () => {
         console.error({ 'Error al cerrar sesion': error });
     }
 }
+
+export const getMessagesService = async (_id) => {
+    try {
+        const response = await fetchService(`${API_URL}/messages/${_id}`, 'GET');
+        const messages = await response.json();
+        return messages;
+    } catch (error) {
+        console.error({ 'Error al obtener mensajes': error });
+    }
+}

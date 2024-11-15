@@ -6,4 +6,4 @@ import { messagesCtrl } from '../controllers/messages.controller.js';
 
 export const messageRouter = Router();
 
-messageRouter.get('/:de', validateJWT, messagesCtrl.getMessages);
+messageRouter.get('/:from', validateJWT, messagesCtrl.getMessages);

@@ -4,21 +4,20 @@ export const messagesCtrl = {};
 
 messagesCtrl.getMessages = async (req, res) => {
     try {
-        const id = req._id;
-        const messageFor = req.params.for;
+        const id = req.user._id;
+        const messageFrom = req.params.from;
 
         const messages = await messageModel.find({
             $or: [
-                { for: id, to: messageFor },
-                { for: messageFor, to: id },
+                { from: id, to: messageFrom },
+                { from: messageFrom, to: id },
             ],
         })
             .sort({ createdAt: 'asc' });
 
 
         res.status(200).json({
-            id,
-            messageFor
+            messages,
         });
     } catch (error) {
         res.status(500).json({

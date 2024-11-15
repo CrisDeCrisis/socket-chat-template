@@ -29,7 +29,7 @@ export const SendMessage = () => {
             //? }
 
             socket.emit('direct-message', {
-                for: state.user._id,
+                from: state.user._id,
                 to: chatState.chatActive,
                 message,
             });

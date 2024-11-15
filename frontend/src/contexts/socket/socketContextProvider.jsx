@@ -44,16 +44,13 @@ export const SocketContextProvider = ({ children }) => {
     useEffect(() => {
 
         socket?.on('direct-message', (message) => {
-
-            console.log(message);
-            // dispatch({
-            //     type: chatTypes.LOAD_MESSAGES,
-            //     payload: message
-            // });
-
+            dispatch({
+                type: chatTypes.NEW_MESSAGE,
+                payload: message
+            });
         });
 
-    }, [socket]);
+    }, [socket, dispatch]);
 
     return (
         <SocketContext.Provider value={{ socket, online }}>

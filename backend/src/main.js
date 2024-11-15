@@ -43,7 +43,7 @@ io.on('connection', async (socket) => {
 
         const message = await saveMessage(payload);
         io.to(payload.to).emit('direct-message', message);
-        io.to(payload.for).emit('direct-message', message);
+        io.to(payload.from).emit('direct-message', message);
 
     });
     //direct-message

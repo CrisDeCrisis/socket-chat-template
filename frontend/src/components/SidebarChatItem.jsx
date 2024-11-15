@@ -1,15 +1,24 @@
 import { useChatContext } from "../contexts/chat/chatContextProvider";
 import { chatTypes } from "../contexts/chat/chatTypes";
+import { getMessagesService } from "../api/API.service";
 
 export const SidebarChatItem = ({ user }) => {
 
     const { chatState, dispatch } = useChatContext();
     const { chatActive } = chatState;
-    const selectChat = () => {
+    const selectChat = async () => {
 
         dispatch({
             type: chatTypes.SELECT_CHAT,
             payload: user._id
+        });
+
+        const res = await getMessagesService(user._id);
+        console.log(res.messages);
+
+        dispatch({
+            type: chatTypes.SET_MESSAGES,
+            payload: res.messages
         });
 
     };
