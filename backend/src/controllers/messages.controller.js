@@ -5,12 +5,12 @@ export const messagesCtrl = {};
 messagesCtrl.getMessages = async (req, res) => {
     try {
         const id = req._id;
-        const messageFor = req.params.de;
+        const messageFor = req.params.for;
 
         const messages = await messageModel.find({
             $or: [
-                { de: id, para: messageFor },
-                { de: messageFor, para: id },
+                { for: id, to: messageFor },
+                { for: messageFor, to: id },
             ],
         })
             .sort({ createdAt: 'asc' });

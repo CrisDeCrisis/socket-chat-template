@@ -1,17 +1,17 @@
 import { Schema, model } from 'mongoose';
 
 const messageSchema = new Schema({
-    de: {
+    for: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
-    para: {
+    to: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
-    mensaje: {
+    message: {
         type: String,
         required: true,
     }

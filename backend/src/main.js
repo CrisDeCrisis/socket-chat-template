@@ -28,6 +28,9 @@ io.on('connection', async (socket) => {
 
     await userOnline(user._id);
 
+    // Unir un usuario a una sala con su _id
+    socket.join(user._id);
+
     //TODO: saber que usuario esta activo mediante el _id
 
     //TODO: emitir todos los usuarios conectados
@@ -36,7 +39,10 @@ io.on('connection', async (socket) => {
     //TODO: socket join, _id
 
     //TODO: escuchar cuando el cliente manda un mensaje
-    //mensaje-personal
+    socket.on('direct-message', (payload) => {
+        console.log(payload);
+    });
+    //direct-message
 
     //TODO: desconectar
     //marcar en la base de datos que el usuario se desconecto

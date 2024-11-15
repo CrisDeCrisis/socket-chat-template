@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useAuthContext } from "../contexts/user/authContextProvider";
+import { useChatContext } from "../contexts/chat/chatContextProvider";
+import { SocketContext } from "../contexts/socket/socketContextProvider";
 
 
 export const SendMessage = () => {
 
     const [message, setMessage] = useState('');
+
+    const { state } = useAuthContext();
+    const { chatState } = useChatContext();
+    const { socket } = useContext(SocketContext);
 
     const handleChange = ({ target }) => {
         setMessage(target.value);
@@ -17,10 +24,16 @@ export const SendMessage = () => {
 
             //TODO Emitir un evento de socket para enviar el msj
             //? {
-            //?     de: //usuario logueado
-            //?     para: //usuario al que se le envia el mensaje
-            //?     mensaje: //mensaje
+            //?     for: //usuario logueado
+            //?     to: //usuario al que se le envia el mensaje
+            //?     message: //message
             //? }
+
+            socket.emit('direct-message', {
+                for: state.user._id,
+                to: chatState.chatActive,
+                message,
+            });
 
             //TODO Hacer el dispatch del msj
         }
