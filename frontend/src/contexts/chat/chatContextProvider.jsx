@@ -6,10 +6,10 @@ const chatContext = createContext();
 export const ChatContextProvider = ({ children }) => {
 
     const initialState = {
-        _id: '', //ID del usuario conectado
-        chatActive: null, //ID del chat activo
-        users: [], //Todos los usuarios de la base de datos
-        messages: [], //Mensajes del chat
+        _id: '',
+        chatActive: null,
+        users: [],
+        messages: [],
     };
 
     const [chatState, dispatch] = useReducer(chatReducer, initialState);

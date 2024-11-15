@@ -1,6 +1,7 @@
 import { useChatContext } from "../contexts/chat/chatContextProvider";
 import { chatTypes } from "../contexts/chat/chatTypes";
 import { getMessagesService } from "../api/API.service";
+import { scrollToBottom } from "../helpers/scrollToBottom";
 
 export const SidebarChatItem = ({ user }) => {
 
@@ -14,12 +15,15 @@ export const SidebarChatItem = ({ user }) => {
         });
 
         const res = await getMessagesService(user._id);
-        console.log(res.messages);
 
         dispatch({
             type: chatTypes.SET_MESSAGES,
             payload: res.messages
         });
+
+        setTimeout(() => {
+            scrollToBottom('chat-messages');
+        }, 0);
 
     };
 

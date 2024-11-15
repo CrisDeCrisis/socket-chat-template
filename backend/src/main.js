@@ -28,17 +28,10 @@ io.on('connection', async (socket) => {
 
     await userOnline(user._id);
 
-    // Unir un usuario a una sala con su _id
     socket.join(user._id);
 
-    //TODO: saber que usuario esta activo mediante el _id
-
-    //TODO: emitir todos los usuarios conectados
     io.emit('users-list', await getUsersOnline());
 
-    //TODO: socket join, _id
-
-    //TODO: escuchar cuando el cliente manda un mensaje
     socket.on('direct-message', async (payload) => {
 
         const message = await saveMessage(payload);
@@ -46,16 +39,11 @@ io.on('connection', async (socket) => {
         io.to(payload.from).emit('direct-message', message);
 
     });
-    //direct-message
 
-    //TODO: desconectar
-    //marcar en la base de datos que el usuario se desconecto
     socket.on('disconnect', async () => {
         await userOffline(user._id);
         io.emit('users-list', await getUsersOnline());
     });
-
-    //TODO: emitir todos los usuarios conectados
 
 });
 

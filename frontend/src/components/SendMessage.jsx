@@ -19,22 +19,14 @@ export const SendMessage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (message.trim().length > 0) {
-            setMessage('');
 
-            //TODO Emitir un evento de socket para enviar el msj
-            //? {
-            //?     for: //usuario logueado
-            //?     to: //usuario al que se le envia el mensaje
-            //?     message: //message
-            //? }
+            setMessage('');
 
             socket.emit('direct-message', {
                 from: state.user._id,
                 to: chatState.chatActive,
                 message,
             });
-
-            //TODO Hacer el dispatch del msj
         }
     }
 
