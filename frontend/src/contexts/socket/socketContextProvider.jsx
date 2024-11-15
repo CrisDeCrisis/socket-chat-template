@@ -41,6 +41,20 @@ export const SocketContextProvider = ({ children }) => {
 
     }, [socket, dispatch]);
 
+    useEffect(() => {
+
+        socket?.on('direct-message', (message) => {
+
+            console.log(message);
+            // dispatch({
+            //     type: chatTypes.LOAD_MESSAGES,
+            //     payload: message
+            // });
+
+        });
+
+    }, [socket]);
+
     return (
         <SocketContext.Provider value={{ socket, online }}>
             {children}

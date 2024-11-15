@@ -19,7 +19,6 @@ export const SendMessage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (message.trim().length > 0) {
-            console.log(message);
             setMessage('');
 
             //TODO Emitir un evento de socket para enviar el msj

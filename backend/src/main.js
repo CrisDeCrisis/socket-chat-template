@@ -5,7 +5,7 @@ import { app } from './app.js';
 import { PORT } from './configs/env.config.js';
 import { connectDB } from './database/dataBase.js';
 import { authJWT } from './helpers/authJWT.helper.js';
-import { getUsersOnline, userOffline, userOnline } from "./controllers/socket.controller.js";
+import { getUsersOnline, saveMessage, userOffline, userOnline } from "./controllers/socket.controller.js";
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -39,8 +39,12 @@ io.on('connection', async (socket) => {
     //TODO: socket join, _id
 
     //TODO: escuchar cuando el cliente manda un mensaje
-    socket.on('direct-message', (payload) => {
-        console.log(payload);
+    socket.on('direct-message', async (payload) => {
+
+        const message = await saveMessage(payload);
+        io.to(payload.to).emit('direct-message', message);
+        io.to(payload.for).emit('direct-message', message);
+
     });
     //direct-message
 

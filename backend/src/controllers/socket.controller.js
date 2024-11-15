@@ -1,4 +1,5 @@
 import { userModel } from '../models/user.model.js';
+import { messageModel } from '../models/message.model.js';
 
 export const userOnline = async (_id) => {
     try {
@@ -32,5 +33,17 @@ export const getUsersOnline = async () => {
         return users;
     } catch (error) {
         console.log(error);
+    };
+};
+
+export const saveMessage = async (payload) => {
+    try {
+        const message = new messageModel(payload);
+        await message.save();
+
+        return message;
+    } catch (error) {
+        console.log(error);
+        return false;
     };
 };
